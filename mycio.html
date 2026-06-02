@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>myCIO | Senior Technology &amp; Security Leadership for NZ Businesses</title>
+<meta name="description" content="myCIO. Independent senior technology and security leadership for growing New Zealand businesses. Strategy, governance, cloud, security, and vendor accountability. We own the outcome.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#0d0d0c;
+    --ink-2:#15151320;
+    --accent:#e05a30;
+    --accent-dim:#c44a25;
+    --white:#ffffff;
+    --paper:#f6f4f0;
+    --paper-2:#ece8e1;
+    --line:#dcd6cc;
+    --muted:#6b665d;
+    --muted-d:#a39d92;
+    --ink-soft:#1c1c1a;
+    --maxw:1140px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter Tight',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:#fff}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  h1,h2,h3{font-weight:700;letter-spacing:-0.03em;line-height:1.02}
+  em{font-family:'Libre Baskerville',serif;font-style:italic;font-weight:400;letter-spacing:-0.01em;color:var(--accent)}
+  .serif{font-family:'Libre Baskerville',serif;font-style:italic}
+
+  /* ---------- Wordmark ---------- */
+  .mark{display:inline-flex;flex-direction:column;line-height:1;text-decoration:none}
+  .mark .word{font-weight:700;letter-spacing:-0.03em;font-size:22px;line-height:1}
+  .mark .my{color:var(--ink)}
+  .mark .cio{color:var(--accent)}
+  .mark .by{font-weight:400;letter-spacing:.01em;font-size:10.5px;color:#a39d92;margin-top:3px}
+  .on-dark .mark .my{color:#fff}
+  .on-dark .mark .by{color:#7a756c}
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(246,244,240,0.82);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;height:70px;gap:24px}
+  .nav-left{display:flex;align-items:center;gap:22px}
+  .switch{display:inline-flex;background:var(--paper-2);border:1px solid var(--line);border-radius:999px;padding:3px}
+  .switch a{
+    text-decoration:none;font-size:13px;font-weight:600;letter-spacing:-0.01em;
+    padding:6px 15px;border-radius:999px;color:var(--muted);transition:color .2s,background .2s;
+  }
+  .switch a.active{background:var(--ink);color:#fff}
+  .switch a:not(.active):hover{color:var(--ink)}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{
+    color:var(--ink-soft);text-decoration:none;font-size:14.5px;font-weight:500;
+    letter-spacing:-0.01em;opacity:.78;transition:opacity .2s;
+  }
+  .nav-links a:hover{opacity:1}
+  .nav-cta{
+    background:var(--accent);color:#fff;padding:11px 20px;border-radius:2px;
+    font-size:14px;font-weight:600;text-decoration:none;transition:background .2s,color .2s;
+  }
+  .nav-cta:hover{background:#cfc9bf;color:var(--ink)}
+  .nav-toggle{display:none;background:none;border:0;cursor:pointer;flex-direction:column;gap:5px;padding:6px}
+  .nav-toggle span{width:24px;height:2px;background:var(--ink);display:block;transition:.25s}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+    font-weight:600;font-size:15px;padding:15px 26px;border-radius:2px;
+    letter-spacing:-0.01em;transition:transform .15s,background .2s,color .2s,border-color .2s;
+  }
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent-dim)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--ink);background:var(--ink);color:#fff}
+  .on-dark .btn-ghost{color:#fff;border-color:#3a3a36}
+  .on-dark .btn-ghost:hover{background:#fff;color:var(--ink);border-color:#fff}
+  .btn .arr{transition:transform .2s}
+  .btn:hover .arr{transform:translateX(4px)}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:12.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
+
+  section{position:relative}
+  .pad{padding:96px 0}
+  .pad-lg{padding:120px 0}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:var(--ink);color:#fff;position:relative;overflow:hidden;
+    padding:118px 0 104px;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;opacity:.5;
+    background:radial-gradient(900px 520px at 78% -8%,rgba(224,90,48,.22),transparent 60%);
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:56px 56px;
+    -webkit-mask-image:linear-gradient(180deg,#000,transparent 75%);
+    mask-image:linear-gradient(180deg,#000,transparent 75%);
+  }
+  .hero .wrap{position:relative;z-index:2}
+  .hero .tag{
+    display:inline-block;font-size:13px;font-weight:500;letter-spacing:.04em;
+    color:var(--muted-d);border:1px solid #2b2b27;padding:7px 14px;border-radius:2px;margin-bottom:30px;
+  }
+  .hero h1{font-size:clamp(40px,6.2vw,76px);max-width:14ch;margin-bottom:26px}
+  .hero h1 em{color:#fff;display:inline}
+  .hero .lede{font-size:clamp(17px,2vw,21px);color:#cfcabf;max-width:54ch;margin-bottom:18px;letter-spacing:-0.01em}
+  .hero .sub{font-size:14.5px;color:var(--muted-d);max-width:62ch;margin-bottom:38px}
+  .hero .sub b{color:#e3ddd2;font-weight:600}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+
+  /* anim */
+  .rise{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .rise.in{opacity:1;transform:none}
+  .hero .rise{transition-delay:var(--d,0s)}
+
+  /* ---------- Section headers ---------- */
+  .shead{max-width:60ch}
+  .shead h2{font-size:clamp(30px,4.2vw,46px);margin-bottom:16px}
+  .shead p{font-size:17px;color:var(--muted);max-width:54ch}
+  .center{text-align:center;margin-left:auto;margin-right:auto}
+
+  /* ---------- Signs grid ---------- */
+  .signs{background:var(--paper-2)}
+  .sign-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:54px}
+  .sign{background:var(--paper);padding:34px 32px;transition:background .25s}
+  .sign:hover{background:#fff}
+  .sign .n{font-family:'Libre Baskerville',serif;font-style:italic;color:var(--accent);font-size:15px;margin-bottom:14px;display:block}
+  .sign h3{font-size:20px;margin-bottom:11px;letter-spacing:-0.02em}
+  .sign p{font-size:15px;color:var(--muted);line-height:1.6}
+  .sign-foot{margin-top:40px;font-size:19px;font-weight:600;letter-spacing:-0.02em;max-width:46ch}
+  .sign-foot em{font-size:20px}
+
+  /* ---------- Stack ---------- */
+  .stack{background:var(--ink);color:#fff}
+  .stack .shead h2{color:#fff}
+  .stack .shead p{color:var(--muted-d)}
+  .stack-rows{margin-top:54px;border-top:1px solid #26261f}
+  .srow{
+    display:grid;grid-template-columns:64px 1fr auto;gap:28px;align-items:center;
+    padding:30px 4px;border-bottom:1px solid #26261f;transition:padding-left .25s,background .25s;
+  }
+  .srow:hover{padding-left:18px;background:#141412}
+  .srow .num{font-family:'Libre Baskerville',serif;font-style:italic;color:var(--accent);font-size:18px}
+  .srow .body h3{font-size:clamp(21px,2.6vw,28px);margin-bottom:6px;color:#fff}
+  .srow .body h3 em{color:var(--accent)}
+  .srow .body p{font-size:15px;color:#bdb8ad;max-width:60ch}
+  .srow .lab{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-d);text-align:right;white-space:nowrap}
+  .srow:first-child .lab{color:var(--accent)}
+
+  /* ---------- Difference ---------- */
+  .diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:54px}
+  .diff{padding:32px 28px;border:1px solid var(--line);border-radius:3px;background:#fff;position:relative;transition:transform .25s,box-shadow .25s}
+  .diff:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(13,13,12,.4)}
+  .diff .n{font-family:'Libre Baskerville',serif;font-style:italic;font-size:15px;color:var(--accent);margin-bottom:18px;display:block}
+  .diff h3{font-size:20px;margin-bottom:12px;letter-spacing:-0.02em;line-height:1.18}
+  .diff p{font-size:15px;color:var(--muted);line-height:1.6}
+
+  /* ---------- Compare ---------- */
+  .compare{background:var(--paper-2)}
+  .cmp{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:50px;border:1px solid var(--line)}
+  .cmp-col{padding:38px 34px}
+  .cmp-col.without{background:var(--paper)}
+  .cmp-col.with{background:var(--ink);color:#fff}
+  .cmp-col h3{font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:24px;font-weight:600}
+  .cmp-col.without h3{color:var(--muted)}
+  .cmp-col.with h3{color:var(--accent)}
+  .cmp-col ul{list-style:none;display:flex;flex-direction:column;gap:16px}
+  .cmp-col li{font-size:15px;line-height:1.5;padding-left:26px;position:relative}
+  .cmp-col.without li{color:#544f47}
+  .cmp-col.without li::before{content:"";position:absolute;left:0;top:8px;width:11px;height:1px;background:#b3aca0}
+  .cmp-col.with li{color:#e3ddd2}
+  .cmp-col.with li::before{content:"";position:absolute;left:0;top:6px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+  .cmp-note{margin-top:30px;font-size:15px;color:var(--muted);max-width:70ch}
+  .shift-intro{margin-top:56px;margin-bottom:6px;font-size:18px;color:var(--ink-soft);max-width:64ch;font-weight:500;letter-spacing:-0.01em}
+
+  /* ---------- Journey ---------- */
+  .stages{margin-top:56px;display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
+  .stage{background:#fff;display:grid;grid-template-columns:200px 1fr 1fr;gap:32px;padding:34px 32px;transition:background .25s}
+  .stage:hover{background:var(--paper)}
+  .stage .lead{}
+  .stage .st-n{font-family:'Libre Baskerville',serif;font-style:italic;color:var(--accent);font-size:14px}
+  .stage .st-name{font-size:24px;font-weight:700;letter-spacing:-0.03em;margin:4px 0 8px}
+  .stage .st-time{font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-d)}
+  .stage .col h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:9px;font-weight:600}
+  .stage .col p{font-size:15px;color:var(--muted);line-height:1.6}
+  .stage .col.out p{color:var(--ink-soft);font-weight:500}
+
+  /* ---------- Engage ---------- */
+  .engage{background:var(--ink);color:#fff}
+  .engage .shead h2{color:#fff}
+  .engage .shead p{color:var(--muted-d)}
+  .eng-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:52px}
+  .eng{border:1px solid #2a2a25;border-radius:3px;padding:32px 28px;background:#121210;transition:border-color .25s,transform .25s}
+  .eng:hover{border-color:var(--accent);transform:translateY(-4px)}
+  .eng .n{font-family:'Libre Baskerville',serif;font-style:italic;color:var(--accent);font-size:15px;margin-bottom:18px;display:block}
+  .eng h3{font-size:20px;color:#fff;margin-bottom:11px;letter-spacing:-0.02em}
+  .eng p{font-size:15px;color:#bdb8ad;line-height:1.6;margin-bottom:18px}
+  .eng .fit{font-size:13px;color:var(--muted-d);border-top:1px solid #2a2a25;padding-top:15px}
+  .eng-note{margin-top:30px;font-size:15px;color:var(--muted-d);max-width:74ch}
+
+  /* ---------- Proof ---------- */
+  .proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:54px}
+  .proof{background:var(--paper);padding:38px 28px;text-align:center}
+  .proof .big{font-size:clamp(34px,4.4vw,50px);font-weight:700;letter-spacing:-0.04em;color:var(--ink);line-height:1}
+  .proof .big.s{font-family:'Libre Baskerville',serif;font-style:italic;font-size:clamp(24px,3vw,32px);color:var(--accent)}
+  .proof .lab{font-size:13.5px;color:var(--muted);margin-top:12px;line-height:1.4}
+
+  /* ---------- FAQ ---------- */
+  .faq{background:var(--paper-2)}
+  .faq-list{margin-top:48px;border-top:1px solid var(--line)}
+  details{border-bottom:1px solid var(--line)}
+  summary{
+    list-style:none;cursor:pointer;padding:24px 4px;display:flex;justify-content:space-between;
+    align-items:center;gap:20px;font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--ink);
+  }
+  summary::-webkit-details-marker{display:none}
+  summary .ic{flex:0 0 auto;width:22px;height:22px;position:relative;transition:transform .3s}
+  summary .ic::before,summary .ic::after{content:"";position:absolute;background:var(--accent);transition:.3s}
+  summary .ic::before{top:10px;left:0;width:22px;height:2px}
+  summary .ic::after{top:0;left:10px;width:2px;height:22px}
+  details[open] summary .ic::after{transform:scaleY(0)}
+  details[open] summary{color:var(--accent)}
+  .faq-body{padding:0 4px 26px;font-size:15.5px;color:var(--muted);line-height:1.65;max-width:74ch}
+  .faq-body b{color:var(--ink-soft);font-weight:600}
+
+  /* ---------- CTA ---------- */
+  .cta{background:var(--ink);color:#fff;text-align:center;overflow:hidden;position:relative}
+  .cta::before{content:"";position:absolute;inset:0;opacity:.6;background:radial-gradient(700px 400px at 50% 120%,rgba(224,90,48,.25),transparent 60%)}
+  .cta .wrap{position:relative;z-index:2}
+  .cta h2{font-size:clamp(32px,5vw,52px);max-width:18ch;margin:0 auto 18px}
+  .cta h2 em{color:#fff}
+  .cta p{font-size:18px;color:#cfcabf;max-width:48ch;margin:0 auto 36px}
+
+  /* ---------- Footer ---------- */
+  footer{background:#0a0a09;color:#fff;padding:64px 0 40px}
+  .foot-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:42px;border-bottom:1px solid #1e1e1a}
+  .foot-brand{max-width:34ch}
+  .foot-brand p{color:var(--muted-d);font-size:14.5px;margin-top:16px;line-height:1.6}
+  .foot-cols{display:flex;gap:64px;flex-wrap:wrap}
+  .foot-col h4{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;font-weight:600}
+  .foot-col a,.foot-col span{display:block;color:#c8c3b8;text-decoration:none;font-size:14.5px;margin-bottom:10px;transition:color .2s}
+  .foot-col a:hover{color:#fff}
+  .foot-bot{padding-top:28px;font-size:13px;color:var(--muted-d);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:920px){
+    .sign-grid,.diff-grid,.eng-grid{grid-template-columns:1fr}
+    .proof-grid{grid-template-columns:repeat(2,1fr)}
+    .cmp{grid-template-columns:1fr}
+    .stage{grid-template-columns:1fr;gap:18px}
+    .srow{grid-template-columns:40px 1fr;gap:16px}
+    .srow .lab{display:none}
+  }
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed;inset:70px 0 auto 0;background:var(--paper);
+      flex-direction:column;align-items:flex-start;gap:0;padding:8px 28px 24px;
+      border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .3s;
+    }
+    .nav-links.open{transform:translateY(0)}
+    .nav-links a{width:100%;padding:15px 0;border-bottom:1px solid var(--line);opacity:1}
+    .nav-links .nav-cta{margin-top:14px;text-align:center}
+    .nav-toggle{display:flex}
+    .nav-left{gap:12px}
+    .switch a{padding:5px 11px;font-size:12px}
+    .pad,.pad-lg{padding:72px 0}
+    .hero{padding:84px 0 76px}
+  }
+  @media (max-width:420px){
+    .mark .word{font-size:18px}
+    .switch a{padding:5px 9px;font-size:11px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="nav-left">
+        <a href="index.html" class="mark" aria-label="myCIO home"><span class="word"><span class="my">my</span><span class="cio">CIO</span></span></a>
+        <div class="switch">
+          <a href="index.html">BetaSys</a>
+          <a href="mycio.html" class="active">myCIO</a>
+        </div>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="#problem">The gap</a>
+        <a href="#difference">Why us</a>
+        <a href="#journey">How we work</a>
+        <a href="#engage">Work with us</a>
+        <a href="#faq">FAQs</a>
+        <a href="#cta" class="nav-cta">Book a 30 min call</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero on-dark" id="top">
+  <div class="wrap">
+    <span class="tag rise" style="--d:0s">Technology &amp; security leadership · New Zealand</span>
+    <h1 class="rise" style="--d:.08s">Your technology is costing more than <em>it should.</em></h1>
+    <p class="lede rise" style="--d:.16s">There is a gap between what your business needs and what your technology delivers. Vendors on autopilot. Projects that stall. A risk picture nobody owns.</p>
+    <p class="sub rise" style="--d:.24s"><b>myCIO</b> is the senior technology and security leadership that closes it. Independent, accountable, and on your side of the table. No products to sell. No junior team behind the pitch.</p>
+    <div class="hero-cta rise" style="--d:.32s">
+      <a href="#cta" class="btn btn-primary">Book a 30 min call <span class="arr">→</span></a>
+      <a href="#engage" class="btn btn-ghost">See the two ways forward</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM / SIGNS -->
+<section class="signs pad" id="problem">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Sound familiar</span>
+      <h2>Five signs the gap is <em>already costing you.</em></h2>
+      <p>None of these show up on an invoice. They show up in lost time, stalled projects, and decisions nobody wants to own.</p>
+    </div>
+    <div class="sign-grid">
+      <div class="sign rise">
+        <span class="n">01</span>
+        <h3>Nobody owns the technology direction.</h3>
+        <p>Decisions get made by whoever is closest to the problem. No strategy, no roadmap, no single person accountable for where it is all heading. Everyone owns a piece. Nobody owns the outcome.</p>
+      </div>
+      <div class="sign rise">
+        <span class="n">02</span>
+        <h3>The risk picture is invisible until something breaks.</h3>
+        <p>Security feels like box ticking, not managed risk. Then the board or your insurer asks a harder question about cyber and compliance, and the honest answer is "I will find out."</p>
+      </div>
+      <div class="sign rise">
+        <span class="n">03</span>
+        <h3>Your MSP manages itself.</h3>
+        <p>They handle the tickets and respond when things break. But nobody holds them to account, checks what you are paying for, or makes sure the work points somewhere sensible.</p>
+      </div>
+      <div class="sign rise">
+        <span class="n">04</span>
+        <h3>Projects stall, drift, and restart.</h3>
+        <p>They kick off with good intentions, then lose momentum. Six months later you are looking at the same problem, often with the same vendor, and a budget that has quietly grown.</p>
+      </div>
+      <div class="sign rise">
+        <span class="n">05</span>
+        <h3>Head office and the sites run on different worlds.</h3>
+        <p>Corporate systems on one side, the technology in each store, branch, or site on the other. Cameras, alarms, access control, point of sale, all of it. Both carry risk. Nobody governs the gap between them, and that gap is where the surprises hide.</p>
+      </div>
+      <div class="sign rise" style="display:flex;align-items:center">
+        <p class="sign-foot">If two or more of these sound familiar, the gap is costing you. <em>It does not close itself.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="stack pad" id="stack">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">How technology actually works</span>
+      <h2>AI is the current buzzword. Cloud was before it. <em>The cycle is endless.</em></h2>
+      <p>None of it works if the business underneath is not solid. Here is the order it actually runs in.</p>
+    </div>
+    <div class="stack-rows">
+      <div class="srow rise">
+        <span class="num">01</span>
+        <div class="body"><h3>Business <em>outcomes.</em></h3><p>Revenue. Efficiency. Uptime. Competitive advantage. Where every technology conversation should start, and rarely does.</p></div>
+        <span class="lab">Top of stack</span>
+      </div>
+      <div class="srow rise">
+        <span class="num">02</span>
+        <div class="body"><h3>AI and <em>automation.</em></h3><p>Most NZ businesses use AI as a tool individuals visit, not a layer running through the business. The value sits in the second one.</p></div>
+        <span class="lab">Where growth happens</span>
+      </div>
+      <div class="srow rise">
+        <span class="num">03</span>
+        <div class="body"><h3>Your <em>data.</em></h3><p>The layer most businesses are missing. Knowledge trapped in people's heads, not in systems. The foundation AI actually builds on.</p></div>
+        <span class="lab">The missing layer</span>
+      </div>
+      <div class="srow rise">
+        <span class="num">04</span>
+        <div class="body"><h3>The <em>plumbing.</em></h3><p>Networking, servers, cloud, Microsoft 365, the technology in every site, and security. The foundation everything else depends on. Get it wrong and nothing above it holds.</p></div>
+        <span class="lab">Where it starts</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFFERENCE + SHIFT (combined) -->
+<section class="pad" id="difference">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Why myCIO</span>
+      <h2>What changes when <em>we are involved.</em></h2>
+    </div>
+    <div class="diff-grid">
+      <div class="diff rise">
+        <span class="n">01</span>
+        <h3>We do not leave until it is working.</h3>
+        <p>Most consultants deliver a report and move on. We own the outcome and fix what breaks. You get a working environment, not a forty-page document nobody reads.</p>
+      </div>
+      <div class="diff rise">
+        <span class="n">02</span>
+        <h3>Your vendors finally have someone to answer to.</h3>
+        <p>We direct them, hold them to their commitments, renegotiate what is not working, and close the gaps they have been ignoring. This alone recovers real money for most clients.</p>
+      </div>
+      <div class="diff rise">
+        <span class="n">03</span>
+        <h3>Built so you are never held hostage.</h3>
+        <p>Documented, portable, and not dependent on any single vendor or person. We build to a seven-year standard, not the industry norm of three.</p>
+      </div>
+    </div>
+    <p class="shift-intro rise">Whether we run your existing provider or replace them, the change is the same. Someone senior owns the direction, the risk, and the outcome. We fix what is not working and build the foundation for where you are heading.</p>
+    <div class="cmp rise">
+      <div class="cmp-col without">
+        <h3>Without senior leadership</h3>
+        <ul>
+          <li>Technology decisions land on the owner's desk by default</li>
+          <li>MSPs and vendors manage themselves and invoice regardless of progress</li>
+          <li>Security posture is unclear and risk is invisible until something goes wrong</li>
+          <li>Projects stall, drift over budget, or never fully land</li>
+          <li>Board updates are jargon heavy, incomplete, or missing</li>
+          <li>Head office and site technology sit in separate worlds with no one governing the gap</li>
+        </ul>
+      </div>
+      <div class="cmp-col with">
+        <h3>With myCIO</h3>
+        <ul>
+          <li>One senior person owns the technology direction end to end</li>
+          <li>Vendors are directed, held to their commitments, and aligned to your goals</li>
+          <li>Security posture is visible, prioritised, and improving on a real plan</li>
+          <li>Projects are scoped clearly, tracked honestly, and finished properly</li>
+          <li>Board ready updates in plain language, every time</li>
+          <li>Head office and site technology governed together, with uptime and security protected in one frame</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="pad" id="journey" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">How we work</span>
+      <h2>From where you are, to <em>where the business is going.</em></h2>
+      <p>Five stages. Not every client needs all five. By the end, the business runs on something documented, defensible, and built to last.</p>
+    </div>
+    <div class="stages">
+      <div class="stage rise">
+        <div class="lead"><span class="st-n">01</span><div class="st-name">Discover</div><span class="st-time">Weeks 1–2</span></div>
+        <div class="col out"><h4>Outcome</h4><p>You know exactly what is broken, what is at risk, and what to fix first. No guesswork, no vendor spin.</p></div>
+        <div class="col"><h4>What happens</h4><p>Full environment review. Every risk, gap, and priority documented. A written report with our honest read and a clear recommendation. No obligation to go further.</p></div>
+      </div>
+      <div class="stage rise">
+        <div class="lead"><span class="st-n">02</span><div class="st-name">Stabilise</div><span class="st-time">Months 1–2</span></div>
+        <div class="col out"><h4>Outcome</h4><p>The fires are out. Your team stops working around technology and starts working with it.</p></div>
+        <div class="col"><h4>What happens</h4><p>Fix the foundations. Reduce technical debt and risk. End the recurring breakdowns. We hold existing vendors accountable and close the gaps costing you every week.</p></div>
+      </div>
+      <div class="stage rise">
+        <div class="lead"><span class="st-n">03</span><div class="st-name">Standardise</div><span class="st-time">Months 2–4</span></div>
+        <div class="col out"><h4>Outcome</h4><p>Your business no longer depends on who happens to be in the room. Anyone can pick it up.</p></div>
+        <div class="col"><h4>What happens</h4><p>Right people, process, and technology at the right service levels. Everything documented. Vendor relationships structured. The business can answer any board or auditor question.</p></div>
+      </div>
+      <div class="stage rise">
+        <div class="lead"><span class="st-n">04</span><div class="st-name">Transform</div><span class="st-time">Month 4+</span></div>
+        <div class="col out"><h4>Outcome</h4><p>Technology is actively working for the business. Your team is faster and you are not the bottleneck.</p></div>
+        <div class="col"><h4>What happens</h4><p>Modern work, AI, and automation built to last. Real competitive advantage, not a pilot project. Every initiative tied to a business outcome and measured against it.</p></div>
+      </div>
+      <div class="stage rise">
+        <div class="lead"><span class="st-n">05</span><div class="st-name">Secure</div><span class="st-time">Ongoing</span></div>
+        <div class="col out"><h4>Outcome</h4><p>Clean board answers. A safe environment. A security posture you can stand behind.</p></div>
+        <div class="col"><h4>What happens</h4><p>Continuous threat detection, compliance, and resilience across IT and OT. Security baked into every decision, not bolted on. Risk reported clearly, no jargon, no surprises.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGE -->
+<section class="engage pad" id="engage">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Work with us</span>
+      <h2>Two ways forward. <em>You choose which.</em></h2>
+      <p>Most clients sit in one of two situations. You have a provider worth keeping but no one steering them, or the provider is the problem and you need it handled. We do both. We tell you honestly which one you need.</p>
+    </div>
+    <div class="eng-grid" style="grid-template-columns:repeat(2,1fr)">
+      <div class="eng rise">
+        <span class="n">01</span>
+        <h3>We run the strategy</h3>
+        <p>You keep your provider. We sit above them and own the direction. Roadmap, security, vCIO and vCISO leadership, board ready reporting, and a vendor that finally has someone senior to answer to. We hold them to their commitments and close the gaps they have been ignoring.</p>
+        <div class="fit"><b>Right if</b> your IT runs day to day but no one senior is steering direction, risk, or vendor performance. Monthly retainer.</div>
+      </div>
+      <div class="eng rise">
+        <span class="n">02</span>
+        <h3>We replace your provider</h3>
+        <p>The current provider is not working, so we take it on. We become your technology function end to end. Strategy, security, delivery, and vendor management under one roof. We migrate you off cleanly, build the foundation properly, and own the result. If something goes wrong, you call us.</p>
+        <div class="fit"><b>Right if</b> you are done being let down and want one accountable partner for everything technology. One monthly fee.</div>
+      </div>
+    </div>
+    <p class="eng-note rise">Not ready for either yet? Start with a scoped assessment or project. A specific problem, a clear outcome, priced before any work begins. It is the cleanest way to see how we work before committing to more. Every engagement starts the same way: a structured discovery, an honest read on where you stand, and a recommended path forward including cost. If it is not the right fit, we will say so.</p>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="pad" id="proof" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="shead rise center">
+      <span class="eyebrow" style="justify-content:center">The record</span>
+      <h2>Senior, in the room, and <em>responsible for the outcome.</em></h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof rise"><div class="big">35+</div><div class="lab">Years combined experience across IT, OT, and security leadership</div></div>
+      <div class="proof rise"><div class="big">$500k</div><div class="lab">Saved by one client in the first vendor review</div></div>
+      <div class="proof rise"><div class="big s">NZ only</div><div class="lab">No offshore handoffs. The people you meet do the work.</div></div>
+      <div class="proof rise"><div class="big">7yr</div><div class="lab">The standard we build to, not the industry norm of three</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq pad" id="faq">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Questions people ask</span>
+      <h2>A few things <em>worth knowing.</em></h2>
+    </div>
+    <div class="faq-list">
+      <details class="rise" open>
+        <summary>What does a first engagement look like?<span class="ic"></span></summary>
+        <div class="faq-body">No hard sell and no long proposal before you have seen any value. <b>Week one</b> is a focused conversation with you and whoever needs to be in the room. We learn how you are set up, where it hurts, and what good looks like. <b>Month one</b>, the quick wins are in motion, ownership is clear, and your vendors know who they are dealing with. <b>Ongoing</b>, what clients say most often around month three or four is "I do not think about IT anymore." Not because nothing happens, but because when it does, it gets handled.</div>
+      </details>
+      <details class="rise">
+        <summary>Do you replace our existing IT provider?<span class="ic"></span></summary>
+        <div class="faq-body">It comes down to one question: is the provider worth keeping? If they are, we leave them in place and run the strategy above them. We own the direction and hold them to account, and they keep delivering. If they are the problem, we replace them and become your technology function ourselves. We migrate you off cleanly and own the result end to end. We will give you an honest read on which one you need, even when the answer is keep them. We are not a helpdesk or a ticket queue either way.</div>
+      </details>
+      <details class="rise">
+        <summary>How does pricing work?<span class="ic"></span></summary>
+        <div class="faq-body">Running the strategy above your existing provider is a fixed monthly retainer. Replacing the provider and becoming your technology function is one monthly fee covering strategy, governance, security, vendor management, and delivery. One-off assessments and projects are scoped and priced before any work begins. We quote and work in day rates, not hours, so you are not second guessing time spent. For large projects or on-site work outside Auckland, the approach is agreed upfront. No surprises.</div>
+      </details>
+      <details class="rise">
+        <summary>What size of business do you work with?<span class="ic"></span></summary>
+        <div class="faq-body">If you are big enough to feel real pain from technology that does not quite work, but not large enough to justify a full-time CIO, CISO, and internal IT team, you are likely a good fit. We typically work with New Zealand businesses in retail, manufacturing, food production, logistics, primary industry, construction, and distribution. Often multi-site or franchise operations running the same systems across many locations, often with connected devices and operational technology in the field, and usually spending meaningful money on technology without a senior person governing how it is used.</div>
+      </details>
+      <details class="rise">
+        <summary>Do you work with boards and executives directly?<span class="ic"></span></summary>
+        <div class="faq-body">Yes, and it matters. Many businesses come to us because a board or CEO is asking harder questions about technology risk, cyber insurance, or why projects keep stalling. Part of the value is translating the technology picture into language that works at board level. Clear risk posture, honest progress, and a defensible investment story. If you need someone who can sit in a board meeting and hold the technology and security conversation, that is core to what we do.</div>
+      </details>
+      <details class="rise">
+        <summary>What experience do you have with operational technology and connected devices?<span class="ic"></span></summary>
+        <div class="faq-body">Significant hands-on experience across New Zealand businesses where corporate IT meets the technology running in the field. That covers cameras, alarm panels, access control, and networked devices deployed across many sites, as well as manufacturing, food processing, and primary industry settings with SCADA, PLCs, and plant equipment. This technology carries a different risk profile to a standard office network. Uptime, safety, physical access, and legacy hardware all intersect. We bring the IT governance lens and the operational reality together, rather than forcing a standard IT framework onto an environment it does not fit.</div>
+      </details>
+      <details class="rise">
+        <summary>What if we need on-site support outside Auckland?<span class="ic"></span></summary>
+        <div class="faq-body">We have a long-standing network of trusted partners across New Zealand, including for multi-site rollouts and in manufacturing and primary industry where on-site presence matters. For hands-on delivery outside Auckland, or across many sites at once, we bring in people we know well and have worked with before. You deal with us. We deal with them. The accountability stays in one place.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta pad-lg on-dark" id="cta">
+  <div class="wrap">
+    <span class="eyebrow" style="justify-content:center">Ready when you are</span>
+    <h2>Thirty minutes. You leave knowing exactly <em>where you stand.</em></h2>
+    <p>If your technology is costing more than it should and nobody senior is in charge of fixing that, let's talk. Plain language. No prep needed.</p>
+    <a href="mailto:michael@betasys.co.nz?subject=Intro%20call%20with%20myCIO" class="btn btn-primary">Book a 30 min call <span class="arr">→</span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="on-dark">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <span class="mark" style="margin-bottom:4px"><span class="word" style="font-size:24px"><span class="my">my</span><span class="cio">CIO</span></span></span>
+        <p>Senior technology and security leadership for growing New Zealand businesses. On your side of the table.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>The story</h4>
+          <a href="#problem">The gap</a>
+          <a href="#difference">Why us</a>
+          <a href="#journey">How we work</a>
+        </div>
+        <div class="foot-col">
+          <h4>Get started</h4>
+          <a href="#engage">Work with us</a>
+          <a href="#faq">FAQs</a>
+          <a href="#cta">Talk to us</a>
+        </div>
+        <div class="foot-col">
+          <h4>Contact</h4>
+          <a href="mailto:michael@betasys.co.nz">michael@betasys.co.nz</a>
+          <span>Auckland, New Zealand</span>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 myCIO · Auckland, New Zealand</span>
+      <span>Senior technology leadership, in the room</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  const toggle=document.getElementById('navToggle');
+  const links=document.getElementById('navLinks');
+  toggle.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+  // Scroll reveal
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rise').forEach((el,i)=>{
+    if(!el.closest('.hero')) el.style.transitionDelay=(Math.min(i%6,5)*0.05)+'s';
+    io.observe(el);
+  });
+  // Hero rises fire on load
+  window.addEventListener('load',()=>{document.querySelectorAll('.hero .rise').forEach(el=>el.classList.add('in'));});
+</script>
+</body>
+</html>
