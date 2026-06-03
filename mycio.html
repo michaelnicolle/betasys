@@ -144,10 +144,11 @@
   .hero .rise{transition-delay:var(--d,0s)}
 
   /* ---------- Section headers ---------- */
-  .shead{max-width:60ch}
-  .shead h2{font-size:clamp(30px,4.2vw,46px);margin-bottom:16px}
+  .shead{max-width:760px}
+  .shead h2{font-size:clamp(30px,4.2vw,46px);margin-bottom:16px;max-width:20ch}
   .shead p{font-size:17px;color:var(--muted);max-width:54ch}
   .center{text-align:center;margin-left:auto;margin-right:auto}
+  .shead.center h2,.shead.center p{margin-left:auto;margin-right:auto}
 
   /* ---------- Signs grid ---------- */
   .signs{background:var(--paper-2)}
@@ -184,6 +185,15 @@
   .diff .n{font-family:'Libre Baskerville',serif;font-style:italic;font-size:15px;color:var(--accent);margin-bottom:18px;display:block}
   .diff h3{font-size:20px;margin-bottom:12px;letter-spacing:-0.02em;line-height:1.18}
   .diff p{font-size:15px;color:var(--muted);line-height:1.6}
+
+  /* ---------- Leadership includes ---------- */
+  .incl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:54px}
+  .incl{background:var(--paper);padding:26px 28px;transition:background .25s}
+  .incl:hover{background:#fff}
+  .incl h3{font-size:17px;letter-spacing:-0.02em;margin-bottom:7px;display:flex;align-items:baseline;gap:10px}
+  .incl h3::before{content:"";flex:0 0 auto;width:7px;height:7px;border-radius:50%;background:var(--accent);transform:translateY(-2px)}
+  .incl p{font-size:14.5px;color:var(--muted);line-height:1.55;padding-left:17px}
+  @media (max-width:760px){.incl-grid{grid-template-columns:1fr}}
 
   /* ---------- Compare ---------- */
   .compare{background:var(--paper-2)}
@@ -472,7 +482,7 @@
   <div class="wrap">
     <div class="shead rise">
       <span class="eyebrow">How we work</span>
-      <h2>From where you are, to <em>where the business is going.</em></h2>
+      <h2>From where you are, to <em>where your business is going.</em></h2>
       <p>Five stages. Not every client needs all five. By the end, the business runs on something documented, defensible, and built to last.</p>
     </div>
     <div class="stages">
@@ -528,6 +538,27 @@
       </div>
     </div>
     <p class="eng-note rise">Not ready for either yet? Start with a scoped assessment or project. A specific problem, a clear outcome, priced before any work begins. It is the cleanest way to see how we work before committing to more. Every engagement starts the same way: a structured discovery, an honest read on where you stand, and a recommended path forward including cost. If it is not the right fit, we will say so.</p>
+  </div>
+</section>
+
+<!-- LEADERSHIP INCLUDES -->
+<section class="pad" id="leadership" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">What leadership includes</span>
+      <h2>A senior technology voice in the room, <em>accountable for the outcome.</em></h2>
+      <p>Most businesses at this scale make technology decisions reactively, or let vendors make them. Your vCIO changes that. Here is what is included, not billed as extras.</p>
+    </div>
+    <div class="incl-grid">
+      <div class="incl rise"><h3>A named senior leader</h3><p>One experienced technology leader who owns your outcomes and is accountable for them, available for decisions, escalations, and the hard calls.</p></div>
+      <div class="incl rise"><h3>Quarterly Business Reviews</h3><p>A structured review of security posture, infrastructure health, programme progress, and what is coming next. The roadmap is maintained, not set once and shelved.</p></div>
+      <div class="incl rise"><h3>A rolling 12-month roadmap</h3><p>Updated every quarter and tied to your business priorities. You always know what is planned, what has been delivered, and what is next.</p></div>
+      <div class="incl rise"><h3>Board ready reporting</h3><p>Security posture, active risks, and measurable improvement over time, written in plain language the board and your insurer can act on.</p></div>
+      <div class="incl rise"><h3>A technology risk register</h3><p>The main technology risks to the business, what is being done about each, and where the technical debt sits, reviewed at every QBR and paid down deliberately.</p></div>
+      <div class="incl rise"><h3>Budget and procurement</h3><p>Independent advice on spend before commitments are made. What it buys, what is coming, and where the money should go next. The right outcome, not the one a vendor is pushing.</p></div>
+      <div class="incl rise"><h3>Vendor management</h3><p>We hold your technology vendors to their contracts and service levels. This alone recovers value most businesses are leaving on the table.</p></div>
+      <div class="incl rise"><h3>Tested incident response</h3><p>A plan kept current enough to be useful on the day, with scheduled tabletop walk-throughs so the response is practised before it is needed, plus a senior hand guiding things when something real happens.</p></div>
+    </div>
   </div>
 </section>
 
@@ -615,6 +646,7 @@
         <div class="foot-col">
           <h4>Get started</h4>
           <a href="#engage">Work with us</a>
+          <a href="#leadership">What's included</a>
           <a href="#faq">FAQs</a>
           <a href="#cta">Talk to us</a>
         </div>

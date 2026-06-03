@@ -146,10 +146,11 @@
   .hero .rise{transition-delay:var(--d,0s)}
 
   /* ---------- Section headers ---------- */
-  .shead{max-width:60ch}
-  .shead h2{font-size:clamp(30px,4.2vw,46px);margin-bottom:16px}
+  .shead{max-width:760px}
+  .shead h2{font-size:clamp(30px,4.2vw,46px);margin-bottom:16px;max-width:20ch}
   .shead p{font-size:17px;color:var(--muted);max-width:54ch}
   .center{text-align:center;margin-left:auto;margin-right:auto}
+  .shead.center h2,.shead.center p{margin-left:auto;margin-right:auto}
 
   /* ---------- Signs grid ---------- */
   .signs{background:var(--paper-2)}
@@ -339,10 +340,34 @@
   .bridge .card li{font-size:15px;color:#e3ddd2;padding-left:24px;position:relative}
   .bridge .card li::before{content:"";position:absolute;left:0;top:7px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
 
+  /* ---------- Security layers ---------- */
+  .sec{background:var(--paper-2)}
+  .sec-grid{display:grid;grid-template-columns:300px 1fr;gap:56px;margin-top:54px;align-items:start}
+  .shield-wrap{position:sticky;top:100px;display:flex;flex-direction:column;align-items:center;gap:18px}
+  .shield-svg{width:100%;max-width:260px}
+  .shield-cap{font-size:14px;color:var(--muted);text-align:center;max-width:30ch;line-height:1.5}
+  .shield-cap b{color:var(--ink);font-weight:600}
+  .layers{display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)}
+  .lyr{background:var(--paper);display:grid;grid-template-columns:54px 1fr;gap:22px;padding:26px 28px;transition:background .25s,padding-left .25s;align-items:start;cursor:default}
+  .lyr:hover{background:#fff;padding-left:36px}
+  .lyr .ln{font-family:'Libre Baskerville',serif;font-style:italic;font-size:17px;line-height:1}
+  .lyr .lbody h3{font-size:19px;letter-spacing:-0.02em;margin-bottom:4px}
+  .lyr .lbody .cat{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;display:block}
+  .lyr .lbody p{font-size:15px;color:var(--muted);line-height:1.6}
+  /* layer accent dots matching the shield palette */
+  .lyr[data-l="1"] .ln{color:#7eaeb0}
+  .lyr[data-l="2"] .ln{color:#7d9bbd}
+  .lyr[data-l="3"] .ln{color:#84a98c}
+  .lyr[data-l="4"] .ln{color:#c8ad72}
+  .lyr[data-l="5"] .ln{color:#cb8a64}
+  .lyr[data-l="6"] .ln{color:#bd7a72}
+
   @media (max-width:920px){
     .outcomes{grid-template-columns:1fr}
     .svc-row{grid-template-columns:1fr;gap:16px}
     .bridge .wrap{grid-template-columns:1fr;gap:36px}
+    .sec-grid{grid-template-columns:1fr;gap:34px}
+    .shield-wrap{position:static;max-width:220px;margin:0 auto}
   }
 </style>
 </head>
@@ -361,6 +386,7 @@
       <div class="nav-links" id="navLinks">
         <a href="#problems">The problem</a>
         <a href="#what">What we do</a>
+        <a href="#security">Security</a>
         <a href="#mycio">Leadership</a>
         <a href="#faq">FAQs</a>
         <a href="#cta" class="nav-cta">Talk to us</a>
@@ -489,6 +515,64 @@
   </div>
 </section>
 
+<!-- SECURITY LAYERS -->
+<section class="sec pad" id="security">
+  <div class="wrap">
+    <div class="shead rise">
+      <span class="eyebrow">Security, layered by design</span>
+      <h2>No single tool keeps a <em>business safe.</em></h2>
+      <p>Each layer covers what the others miss. Built, run, and looked after by us, so every layer just works. This is the same protection we put around businesses that cannot afford to be down.</p>
+    </div>
+    <div class="sec-grid">
+      <div class="shield-wrap rise">
+        <svg class="shield-svg" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg" aria-label="Six-layer security shield">
+          <defs><clipPath id="shc"><path d="M22 40 L100 18 L178 40 L178 120 C178 186 140 220 100 234 C60 220 22 186 22 120 Z"></path></clipPath></defs>
+          <g clip-path="url(#shc)">
+            <rect x="0" y="0" width="200" height="250" fill="#0d0d0c"></rect>
+            <rect x="14" y="200.7" width="172" height="32.3" style="fill:#bd7a72"></rect>
+            <rect x="14" y="166.0" width="172" height="32.3" style="fill:#cb8a64"></rect>
+            <rect x="14" y="131.3" width="172" height="32.3" style="fill:#c8ad72"></rect>
+            <rect x="14" y="96.7" width="172" height="32.3" style="fill:#84a98c"></rect>
+            <rect x="14" y="62.0" width="172" height="32.3" style="fill:#7d9bbd"></rect>
+            <rect x="14" y="27.3" width="172" height="32.3" style="fill:#7eaeb0"></rect>
+          </g>
+          <path d="M22 40 L100 18 L178 40 L178 120 C178 186 140 220 100 234 C60 220 22 186 22 120 Z" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2.4"></path>
+          <circle cx="100" cy="130" r="33" fill="rgba(8,12,22,.42)"></circle>
+          <path d="M90 122 V112 a10 10 0 0 1 20 0 V122" fill="none" stroke="#fff" stroke-width="4.5"></path>
+          <rect x="83" y="122" width="34" height="28" rx="6" fill="#fff"></rect>
+        </svg>
+        <p class="shield-cap">Six layers. One shield. <b>All managed</b>, so nothing falls through the cracks.</p>
+      </div>
+      <div class="layers">
+        <div class="lyr rise" data-l="6">
+          <span class="ln">06</span>
+          <div class="lbody"><span class="cat">Recovery</span><h3>Recovery you can count on</h3><p>If the worst ever happens, you are already covered. Safe offsite backups held in immutable cloud storage, and a ready-to-go copy in Microsoft Azure if you need it. Back up and running quickly, with little disruption.</p></div>
+        </div>
+        <div class="lyr rise" data-l="5">
+          <span class="ln">05</span>
+          <div class="lbody"><span class="cat">Monitoring</span><h3>24x7 detection and response</h3><p>Real people watching over your systems, day and night. Someone is always watching, every hour of every day. Real threats are investigated and shut down quickly. Cover that never sleeps, weekends and holidays included.</p></div>
+        </div>
+        <div class="lyr rise" data-l="4">
+          <span class="ln">04</span>
+          <div class="lbody"><span class="cat">Compliance</span><h3>Always-on compliance</h3><p>We set things up safely, then keep them that way. Your security is checked against the standard around the clock. Anything that slips out of line is put right. Proof you are protected, ready whenever you need it.</p></div>
+        </div>
+        <div class="lyr rise" data-l="3">
+          <span class="ln">03</span>
+          <div class="lbody"><span class="cat">Identity</span><h3>Protection for every login</h3><p>A stolen password is the easy way in, so we watch for it. Accounts behaving oddly are spotted and stopped fast. Risky or unexpected logins are flagged early. Stolen passwords are caught before they do harm.</p></div>
+        </div>
+        <div class="lyr rise" data-l="2">
+          <span class="ln">02</span>
+          <div class="lbody"><span class="cat">Network</span><h3>A guarded front door</h3><p>Most threats are turned away before they reach your team. Firewalls check everything coming in and out. Safe connections across your sites and the cloud. Trouble is stopped at the edge, not at someone's desk.</p></div>
+        </div>
+        <div class="lyr rise" data-l="1">
+          <span class="ln">01</span>
+          <div class="lbody"><span class="cat">Foundation</span><h3>A solid foundation</h3><p>Every device and login set up the same safe way. Microsoft 365 configured securely for everyone. Every device built to the same trusted standard. No odd setups or forgotten gaps to exploit.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- MYCIO BRIDGE -->
 <section class="bridge pad-lg" id="mycio">
   <div class="wrap">
@@ -534,6 +618,10 @@
         <div class="faq-body">Yes. We treat physical and digital security as one picture. Cameras, alarms, and access control in the field, and the networks, data, and systems behind them. For a multi-site or franchise business, the value is in joining it all up. One clear view of what is protected and what is exposed across every location, managed and tested, not assumed.</div>
       </details>
       <details class="rise">
+        <summary>What happens if we get hit by ransomware?<span class="ic"></span></summary>
+        <div class="faq-body">This is what the six layers are built for. Detection and response runs 24x7, so an attack is caught and contained fast, not discovered on Monday morning. Your backups are held offsite in immutable storage, which means they cannot be encrypted or deleted by an attacker, and a ready-to-go copy sits in Microsoft Azure. If the worst happens, we restore you and get the business trading again with as little disruption as possible. We also help you answer your cyber insurer honestly at renewal, backed by the controls already in place, so your cover holds when you need it.</div>
+      </details>
+      <details class="rise">
         <summary>We already have an IT provider. Where do you fit?<span class="ic"></span></summary>
         <div class="faq-body">It depends on whether they are working for you. If they are, we can deliver specific projects or sit above them through myCIO to own the direction and hold them to account. If they are the problem, we can take it all on ourselves and become your one accountable partner. We will give you an honest read on which makes sense, even when the answer is to keep what you have.</div>
       </details>
@@ -572,7 +660,7 @@
           <h4>BetaSys</h4>
           <a href="#problems">The problem</a>
           <a href="#what">What we do</a>
-          <a href="#mycio">Leadership</a>
+          <a href="#security">Security</a>
         </div>
         <div class="foot-col">
           <h4>myCIO</h4>
