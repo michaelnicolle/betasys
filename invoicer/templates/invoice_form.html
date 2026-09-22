@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}{{ invoice.number or 'New invoice' }}{% endblock %}
+{% block content %}
+
+<form method="post" id="invoice-form"
+      action="{% if invoice.id %}{{ url_for('save_invoice', invoice_id=invoice.id) }}{% else %}{{ url_for('save_invoice') }}{% endif %}">
+
+  <div class="page-head">
+    <h1>{% if invoice.id %}Invoice {{ invoice.number }}{% else %}New invoice{% endif %}</h1>
+    <div class="row-end">
+      <button class="btn" type="submit" name="action" value="save">Save</button>
+      <button class="btn primary" type="submit" name="action" value="pdf">Save &amp; download PDF</button>
+    </div>
+  </div>
+
+  <div class="card grid-4">
+    <label>Client
+      <select name="client_id" id="client-select">
+        <option value="">— select a client —</option>
+        {% for c in clients %}
+          <option value="{{ c.id }}" {% if c.id == invoice.client_id %}selected{% endif %}>{{ c.name }}</option>
+        {% endfor %}
+      </select>
+      <a class="hint-link" href="{{ url_for('clients') }}">Manage clients</a>
+    </label>
+    <label>Invoice number <input name="number" value="{{ invoice.number }}"></label>
+    <label>Issue date <input type="date" name="issue_date" id="issue-date" value="{{ invoice.issue_date }}"></label>
+    <label>Due date <input type="date" name="due_date" id="due-date" value="{{ invoice.due_date }}"></label>
+
+    <label>Reference <input name="reference" value="{{ invoice.reference }}" placeholder="e.g. Susie"></label>
+    <label>GST rate %
+      <input name="gst_rate" id="gst-rate" value="{{ invoice.gst_rate }}" inputmode="decimal">
+    </label>
+    <label>Amount already paid
+      <input name="amount_paid" id="amount-paid" value="{{ invoice.amount_paid }}" inputmode="decimal">
+    </label>
+    <label>Status
+      <select name="status">
+        {% for value in ['draft', 'sent', 'paid'] %}
+          <option value="{{ value }}" {% if invoice.status == value %}selected{% endif %}>{{ value|capitalize }}</option>
+        {% endfor %}
+      </select>
+    </label>
+  </div>
+
+  <div class="card">
+    <div class="page-head">
+      <h2>Line items</h2>
+      <button class="btn" type="button" id="add-row">Add line</button>
+    </div>
+
+    <table class="items" id="items-table">
+      <thead>
+        <tr>
+          <th class="w-code">Item</th>
+          <th>Name &amp; description</th>
+          <th class="w-num">Quantity</th>
+          <th class="w-num">Price</th>
+          <th class="w-num">Amount</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="items-body"></tbody>
+    </table>
+
+    <div class="totals">
+      <div><span>Subtotal</span><span id="t-subtotal">0.00</span></div>
+      <div><span>GST <span id="t-rate">15</span>%</span><span id="t-gst">0.00</span></div>
+      <div class="strong"><span>Total</span><span id="t-total">0.00</span></div>
+      <div id="paid-row"><span><em>Less amount paid</em></span><span id="t-paid">0.00</span></div>
+      <div class="strong big"><span>Amount due</span><span id="t-due">0.00</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <label>Footer text for this invoice
+      <textarea name="footer_text" rows="4"
+                placeholder="Leave blank to use the default from Settings">{{ invoice.footer_text }}</textarea>
+    </label>
+  </div>
+
+  <div class="row-end form-actions">
+    {% if invoice.id %}
+      <a class="btn" href="{{ url_for('invoice_pdf', invoice_id=invoice.id, inline=1) }}" target="_blank">Preview PDF</a>
+    {% endif %}
+    <button class="btn" type="submit" name="action" value="save">Save</button>
+    <button class="btn primary" type="submit" name="action" value="pdf">Save &amp; download PDF</button>
+  </div>
+</form>
+
+<template id="row-template">
+  <tr class="item-row">
+    <td><input class="f-code" placeholder="PS"></td>
+    <td>
+      <input class="f-name" placeholder="Item name (optional)">
+      <textarea class="f-description" rows="2" placeholder="Description"></textarea>
+    </td>
+    <td><input class="f-quantity num" inputmode="decimal" value="1"></td>
+    <td><input class="f-unit_price num" inputmode="decimal" value="0.00"></td>
+    <td class="num amount">0.00</td>
+    <td><button class="btn small danger remove" type="button" title="Remove line">&times;</button></td>
+  </tr>
+</template>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  window.INVOICE_ITEMS = {{ invoice['items'] | tojson }};
+  window.PAYMENT_TERMS_DAYS = {{ settings.payment_terms_days | int }};
+  window.CURRENCY = {{ settings.currency_symbol | tojson }};
+</script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+{% endblock %}

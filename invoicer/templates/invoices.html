@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Invoices{% endblock %}
+{% block content %}
+<h1>Invoices</h1>
+
+{% if not invoices %}
+  <div class="empty">
+    <p>No invoices yet.</p>
+    <a class="btn primary" href="{{ url_for('new_invoice') }}">Create your first invoice</a>
+  </div>
+{% else %}
+<table class="list">
+  <thead>
+    <tr>
+      <th>Number</th><th>Client</th><th>Issued</th><th>Reference</th>
+      <th class="num">Total</th><th class="num">Due</th><th>Status</th><th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for inv in invoices %}
+    <tr>
+      <td><a href="{{ url_for('edit_invoice', invoice_id=inv.id) }}">{{ inv.number }}</a></td>
+      <td>{{ inv.client.name or inv.client_name or '—' }}</td>
+      <td>{{ inv.issue_display }}</td>
+      <td>{{ inv.reference }}</td>
+      <td class="num">{{ settings.currency_symbol }}{{ '{:,.2f}'.format(inv.totals.total) }}</td>
+      <td class="num">{{ settings.currency_symbol }}{{ '{:,.2f}'.format(inv.totals.due) }}</td>
+      <td><span class="pill {{ inv.status }}">{{ inv.status }}</span></td>
+      <td class="actions">
+        <a class="btn small" href="{{ url_for('invoice_pdf', invoice_id=inv.id) }}">PDF</a>
+        <form method="post" action="{{ url_for('duplicate_invoice', invoice_id=inv.id) }}">
+          <button class="btn small" type="submit">Copy</button>
+        </form>
+        <form method="post" action="{{ url_for('delete_invoice', invoice_id=inv.id) }}"
+              onsubmit="return confirm('Delete invoice {{ inv.number }}? This cannot be undone.');">
+          <button class="btn small danger" type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

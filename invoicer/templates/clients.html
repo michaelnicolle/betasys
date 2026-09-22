@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Clients{% endblock %}
+{% block content %}
+<h1>Clients</h1>
+
+<div class="split">
+  <section>
+    {% if not clients %}
+      <p class="muted">No clients yet — add one on the right.</p>
+    {% else %}
+    <table class="list">
+      <thead><tr><th>Name</th><th>Address</th><th>Contact</th><th></th></tr></thead>
+      <tbody>
+        {% for c in clients %}
+        <tr>
+          <td><strong>{{ c.name }}</strong></td>
+          <td class="pre">{{ c.address }}</td>
+          <td>{{ c.email }}{% if c.phone %}<br>{{ c.phone }}{% endif %}</td>
+          <td class="actions">
+            <button class="btn small" type="button"
+                    data-edit-client
+                    data-id="{{ c.id }}"
+                    data-name="{{ c.name }}"
+                    data-address="{{ c.address }}"
+                    data-email="{{ c.email }}"
+                    data-phone="{{ c.phone }}">Edit</button>
+            <form method="post" action="{{ url_for('delete_client', client_id=c.id) }}"
+                  onsubmit="return confirm('Remove {{ c.name }}? Existing invoices keep their details.');">
+              <button class="btn small danger" type="submit">Remove</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </section>
+
+  <aside class="card">
+    <h2 id="client-form-title">Add a client</h2>
+    <form method="post" action="{{ url_for('save_client') }}" id="client-form">
+      <input type="hidden" name="id" id="client-id">
+      <label>Name <input name="name" id="client-name" required></label>
+      <label>Address
+        <textarea name="address" id="client-address" rows="4"
+                  placeholder="66 Glenmall Place&#10;Glen Eden&#10;Auckland 0602&#10;New Zealand"></textarea>
+      </label>
+      <label>Email <input name="email" id="client-email" type="email"></label>
+      <label>Phone <input name="phone" id="client-phone"></label>
+      <div class="row-end">
+        <button class="btn" type="reset" id="client-reset">Clear</button>
+        <button class="btn primary" type="submit">Save client</button>
+      </div>
+    </form>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.querySelectorAll('[data-edit-client]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var d = button.dataset;
+      document.getElementById('client-id').value = d.id;
+      document.getElementById('client-name').value = d.name;
+      document.getElementById('client-address').value = d.address;
+      document.getElementById('client-email').value = d.email;
+      document.getElementById('client-phone').value = d.phone;
+      document.getElementById('client-form-title').textContent = 'Edit client';
+      document.getElementById('client-name').focus();
+    });
+  });
+  document.getElementById('client-reset').addEventListener('click', function () {
+    document.getElementById('client-id').value = '';
+    document.getElementById('client-form-title').textContent = 'Add a client';
+  });
+</script>
+{% endblock %}

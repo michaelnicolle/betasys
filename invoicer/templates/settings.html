@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Settings{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Settings</h1>
+  <a class="btn" href="{{ url_for('sample_pdf') }}" target="_blank">Preview sample PDF</a>
+</div>
+
+<form method="post" enctype="multipart/form-data">
+  <div class="card">
+    <h2>Your business</h2>
+    <div class="grid-2">
+      <label>Business name <input name="company_name" value="{{ current.company_name }}"></label>
+      <label>GST number <input name="gst_number" value="{{ current.gst_number }}"></label>
+      <label class="span-2">Address
+        <textarea name="company_address" rows="3">{{ current.company_address }}</textarea>
+      </label>
+      <label>Logo (PNG, JPG or GIF)
+        <input type="file" name="logo" accept=".png,.jpg,.jpeg,.gif">
+        <span class="hint">Leave empty to keep the current logo.</span>
+      </label>
+      <label>Accent colour
+        <input type="color" name="accent_color" value="{{ current.accent_color }}">
+      </label>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Invoice defaults</h2>
+    <div class="grid-2">
+      <label>Heading <input name="title" value="{{ current.title }}"></label>
+      <label>Currency symbol <input name="currency_symbol" value="{{ current.currency_symbol }}"></label>
+      <label>GST rate % <input name="gst_rate" value="{{ current.gst_rate }}" inputmode="decimal"></label>
+      <label>GST label <input name="gst_label" value="{{ current.gst_label }}"></label>
+      <label>Payment terms (days) <input name="payment_terms_days" value="{{ current.payment_terms_days }}" inputmode="numeric"></label>
+      <label>Invoice number format
+        <input name="number_format" value="{{ current.number_format }}">
+        <span class="hint">Tokens: {YYYY} {YY} {MM} {DD} {YYMMDD} {YYYYMMDD} {YYYYMM} {SEQ:03}</span>
+      </label>
+      <label class="span-2">Footer text
+        <textarea name="footer_text" rows="5">{{ current.footer_text }}</textarea>
+      </label>
+    </div>
+  </div>
+
+  <div class="row-end">
+    <button class="btn primary" type="submit">Save settings</button>
+  </div>
+</form>
+{% endblock %}
