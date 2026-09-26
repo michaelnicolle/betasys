@@ -82,6 +82,24 @@ folder. Deleting `invoices.db` starts over from scratch.
 Editing a client changes future invoices only — each invoice keeps a copy of
 the address it was actually sent to, so old PDFs never change.
 
+## Keeping it in OneDrive or Dropbox
+
+The folder is self-contained, so syncing it works — with two settings worth
+getting right:
+
+- **Leave `.venv` out of the sync.** In OneDrive: Settings → Account → Choose
+  folders, and untick `.venv`. It's a few thousand files of downloaded
+  libraries, it's built for the machine that created it, and `run.bat`
+  rebuilds it by itself on any machine that hasn't got one.
+- **Set the folder to "Always keep on this device"** (right-click it in File
+  Explorer). Otherwise the sync client can make `invoices.db` online-only,
+  and the app can't open it.
+
+**Don't run it on two machines at once.** `invoices.db` is a single SQLite
+file. Two copies writing to it while the folder syncs between them can lose
+invoices or corrupt the file. Close it on one machine before opening it on
+the other.
+
 ## Notes
 
 - The Xero *View online* QR code and link are deliberately left out; there is
