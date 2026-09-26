@@ -262,8 +262,10 @@ class _Document:
         y = 90.0
         L.text(LEFT, y, "Bill to", bold=True)
         y += LINE
-        address_lines = [l for l in (client.get("address") or "").splitlines() if l.strip()]
-        for line in address_lines:
+        # Name first, then the address - mirroring the company block opposite.
+        client_lines = [l for l in [(client.get("name") or "").strip()] +
+                        (client.get("address") or "").splitlines() if l.strip()]
+        for line in client_lines:
             L.text(LEFT, y, line.strip())
             y += LINE
         contacts = [v for v in (client.get("email"), client.get("phone")) if (v or "").strip()]

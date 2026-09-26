@@ -32,8 +32,9 @@ python -m venv .venv
 invoice-number format. These are pre-filled from your existing invoices, so
 you can go straight to invoicing.
 
-**Clients** — name, address, email and phone. The address block prints exactly
-as you type it, one line per line.
+**Clients** — name, address, email and phone. The *Bill to* block prints the
+client name first, then the address exactly as you type it, one line per
+line, then the email and phone.
 
 **Invoices** — pick a client, add lines, save. Each line has:
 
